@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class DeviceIdService {
@@ -16,7 +17,7 @@ class DeviceIdService {
         deviceId = info.identifierForVendor;
       }
     } on PlatformException {
-      print("Failed to get Device ID.");
+      debugPrint("Failed to get Device ID.");
       return null;
     }
     return deviceId;

@@ -104,7 +104,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
           );
         });
     try {
-      print("\n\n $email \n\n");
+      debugPrint("\n\n $email \n\n");
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       Navigator.of(context).pop();
       snackBarMessage(context,

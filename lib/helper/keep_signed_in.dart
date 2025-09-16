@@ -41,7 +41,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
           return const ChatPage();
         } else {
-          return LoginPage();
+          return const LoginPage();
         }
       },
     );

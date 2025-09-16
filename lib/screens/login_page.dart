@@ -13,20 +13,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class LoginPage extends StatelessWidget {
-  String? email;
-  String? password;
-  String? username;
+class LoginPage extends StatefulWidget {
   static String id = "loginPage";
+
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String? email;
+
+  String? password;
+
+  String? username;
+
   bool isLoading = false;
+
   CollectionReference user =
       FirebaseFirestore.instance.collection(kUsersCollection);
+
   GlobalKey<FormState> formKey = GlobalKey();
+
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
   bool obscureText = true;
 
-  LoginPage({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
@@ -35,7 +50,6 @@ class LoginPage extends StatelessWidget {
           isLoading = false;
           emailController.clear();
           passwordController.clear();
-          dispose();
           updateUserStatus();
           Navigator.pushReplacementNamed(
             context,
@@ -171,7 +185,9 @@ class LoginPage extends StatelessWidget {
     );
   }
 
+  @override
   void dispose() {
+    super.dispose();
     emailController.dispose();
     passwordController.dispose();
   }
