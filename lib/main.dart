@@ -1,3 +1,5 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loopchat/cubits/login_cubit/login_cubit.dart';
 import 'package:loopchat/screens/chat_page.dart';
 import 'package:loopchat/screens/forget_password_page.dart';
 import 'package:loopchat/screens/login_page.dart';
@@ -16,7 +18,8 @@ void main() async {
   );
 
   await FirebaseAppCheck.instance.activate(
-    androidProvider: kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+    androidProvider:
+        kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
     appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.appAttest,
   );
   runApp(const ChatApp());
@@ -27,19 +30,18 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const StartupGate(),
-      routes: {
-        LoginPage.id: (context) {
-          return const LoginPage();
+    return BlocProvider(
+      create: (context) => LoginCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const StartupGate(),
+        routes: {
+          LoginPage.id: (context) => LoginPage(),
+          RegisterPage.id: (context) =>const RegisterPage(),
+          ChatPage.id: (context) => const ChatPage(),
+          ForgetPasswordPage.id: (context) => const ForgetPasswordPage()
         },
-        RegisterPage.id: (context) {
-          return const RegisterPage();
-        },
-        ChatPage.id: (context) => ChatPage(),
-        ForgetPasswordPage.id: (context) => const ForgetPasswordPage()
-      },
+      ),
     );
   }
 }

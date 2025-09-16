@@ -39,9 +39,9 @@ class _AuthWrapperState extends State<AuthWrapper> {
         if (snapshot.hasData) {
           updateUserStatus();
 
-          return ChatPage();
+          return const ChatPage();
         } else {
-          return const LoginPage();
+          return LoginPage();
         }
       },
     );
