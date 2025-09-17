@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loopchat/constants.dart';
-import 'package:loopchat/cubits/register_cubit/register_cubit.dart';
+import 'package:loopchat/cubits/auth_cubit/auth_cubit.dart';
 import 'package:loopchat/helper/hint_input_text.dart';
 import 'package:loopchat/helper/show_snack_bar.dart';
 import 'package:loopchat/helper/update_user_status.dart';
@@ -40,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterCubit, RegisterState>(
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is RegisterSuccess) {
           isLoading = false;
@@ -117,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             text: "Register",
                             onTap: () async {
                               if (formKey.currentState!.validate()) {
-                                BlocProvider.of<RegisterCubit>(context).registerNewAcc(email: emailController.text.trim(), password: passwordController.text.trim(), userName: usernameController.text.trim());
+                                BlocProvider.of<AuthCubit>(context).registerNewAcc(email: emailController.text.trim(), password: passwordController.text.trim(), userName: usernameController.text.trim());
                               }
                             },
                           ),

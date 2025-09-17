@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loopchat/constants.dart';
-import 'package:loopchat/cubits/login_cubit/login_cubit.dart';
+import 'package:loopchat/cubits/auth_cubit/auth_cubit.dart';
 import 'package:loopchat/helper/hint_input_text.dart';
 import 'package:loopchat/helper/show_snack_bar.dart';
 import 'package:loopchat/helper/update_user_status.dart';
@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginState>(
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
           isLoading = false;
@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                         CustomButton(
                           text: "Login",
                           onTap: () {
-                            BlocProvider.of<LoginCubit>(context)
+                            BlocProvider.of<AuthCubit>(context)
                                 .loginUser(email: email, password: password);
                           },
                         ),
@@ -185,10 +185,10 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  // }
 }

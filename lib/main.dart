@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loopchat/cubits/login_cubit/login_cubit.dart';
-import 'package:loopchat/cubits/register_cubit/register_cubit.dart';
+import 'package:loopchat/cubits/auth_cubit/auth_cubit.dart';
 import 'package:loopchat/screens/chat_page.dart';
 import 'package:loopchat/screens/forget_password_page.dart';
 import 'package:loopchat/screens/login_page.dart';
@@ -32,9 +31,8 @@ class ChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-      BlocProvider(create: (context) => LoginCubit()),  
-      BlocProvider(create: (context) => RegisterCubit()),  
+      providers: [ 
+      BlocProvider(create: (context) => AuthCubit()),  
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
