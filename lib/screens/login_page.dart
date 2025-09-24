@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loopchat/blocs/auth_bloc/auth_bloc.dart';
 import 'package:loopchat/constants.dart';
-import 'package:loopchat/cubits/auth_cubit/auth_cubit.dart';
+// import 'package:loopchat/cubits/auth_cubit/auth_cubit.dart';
 import 'package:loopchat/helper/hint_input_text.dart';
 import 'package:loopchat/helper/show_snack_bar.dart';
 import 'package:loopchat/helper/update_user_status.dart';
@@ -44,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
           isLoading = false;
@@ -143,8 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                         CustomButton(
                           text: "Login",
                           onTap: () {
-                            BlocProvider.of<AuthCubit>(context)
-                                .loginUser(email: email, password: password);
+                            BlocProvider.of<AuthBloc>(context).add(LoginEvent(email: emailController.text.trim(), password: emailController.text.trim()));
                           },
                         ),
                         const SizedBox(

@@ -33,7 +33,6 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    // String username = ModalRoute.of(context)!.settings.arguments as String;
     final fbUser = FirebaseAuth.instance.currentUser;
     final String? uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null || fbUser == null) {
@@ -44,7 +43,6 @@ class _ChatPageState extends State<ChatPage> {
       );
     }
     final String username = fbUser.displayName ?? fbUser.email ?? fbUser.uid;
-    // var email = ModalRoute.of(context)!.settings.arguments;
     return StreamBuilder<DocumentSnapshot>(
         stream: user.doc(uid).snapshots(),
         builder: (context, userSnapshot) {

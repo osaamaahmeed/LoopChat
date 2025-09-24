@@ -12,7 +12,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
   //Login Functions
-    String ?email;
+  String ?email;
   String ?userName;
 
   Future<void> loginUser({required email, required password}) async {

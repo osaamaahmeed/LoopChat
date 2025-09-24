@@ -1,9 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loopchat/blocs/auth_bloc/auth_bloc.dart';
 import 'package:loopchat/cubits/auth_cubit/auth_cubit.dart';
 import 'package:loopchat/screens/chat_page.dart';
 import 'package:loopchat/screens/forget_password_page.dart';
 import 'package:loopchat/screens/login_page.dart';
 import 'package:loopchat/screens/register_page.dart';
+import 'package:loopchat/simple_bloc_observer.dart';
 import 'package:loopchat/start/startup_gate.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/foundation.dart';
@@ -16,7 +18,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  Bloc.observer = Simpleblocobserver();
   await FirebaseAppCheck.instance.activate(
     androidProvider:
         kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
@@ -32,7 +34,8 @@ class ChatApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [ 
-      BlocProvider(create: (context) => AuthCubit()),  
+      BlocProvider(create: (context) => AuthCubit()), 
+      BlocProvider(create: (context) => AuthBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
